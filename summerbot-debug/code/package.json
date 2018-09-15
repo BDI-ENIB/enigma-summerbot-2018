@@ -1,0 +1,15 @@
+{
+  "name": "motion debug iface",
+  "version": "1.0.0",
+  "main": "index.html",
+  "window": {
+    "toolbar": false,
+    "fullscreen": false,
+    "resizable": true,
+    "width": 800,
+    "height": 600,
+    "min_width": 400,
+    "min_height": 300
+  },
+  "dependencies": {}
+}
