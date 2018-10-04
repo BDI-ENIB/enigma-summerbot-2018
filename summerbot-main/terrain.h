@@ -1,6 +1,6 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
-bool globalSide=false;
+volatile extern bool globalSide;
 //cubes
 #define PLUS_1_X 1190
 #define PLUS_1_Y (globalSide?300:2700)
@@ -33,9 +33,13 @@ bool globalSide=false;
 #define DRAIN_CLEAR_Y (globalSide?0:3000)
 
 #define SOURCE_WASTE_X 2000
-#define SOURCE_WASE_Y (globalSide?610:2390)
+#define SOURCE_WASTE_Y (globalSide?610:2390)
 
 #define DRAIN_WASTE_X 1750
 #define DRAIN_WASTE_Y (globalSide?1197:1803)
+
+#define START_1_X (110+55)
+#define START_1_Y (globalSide?110+30:3000-140)
+#define START_1_A ((globalSide?3.141592:-3.141592)/2.0)
 
 #endif

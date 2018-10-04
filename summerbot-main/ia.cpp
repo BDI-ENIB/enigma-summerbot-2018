@@ -1,58 +1,88 @@
 #include "ia.hpp"
-#define LEFT_SIDE true
+#include <Arduino.h>
 
+IA::IA(MotionBase *mb, Claw *claw, Screen *screen, Bee *bee):
+  protocols_{},
+  protocolCount_{},
+  mb{mb},
+  claw{claw},
+  screen{screen},
+  bee{bee},
+  maxFlagIndex{0} {}
 
-IA::IA(MotionBase *mb, Claw *claw){
-	this->mb = mb;
-	this->claw = claw;
+IA::IA(MotionBase *mb, Claw *claw, Screen *screen, Bee *bee, Protocol *protocols[], unsigned short int protocolCount):
+  protocols_{},
+  protocolCount_{protocolCount},
+  mb{mb},
+  claw{claw},
+  bee{bee},
+  screen{screen},
+  maxFlagIndex{0} {
+  for (unsigned short int i = 0; i < protocolCount; ++i) {
+    protocols_[i] = protocols[i];
+  }
 }
 
-void IA::addCommands(Command commandList[], short listSize){
-	for(char i = 0; i<listSize; i++){
-		protocol[i+protocolLenght]=commandList[i];
-	}
-  protocolLenght+=listSize;
+void IA::addProtocol(Protocol *protocol) {
+  protocols_[protocolCount_++] = protocol;
 }
 
-void IA::update(){
-  //Serial.println(this->toString());
-	if(!mb->isBusy()/*&&!claw->isBusy()*/){
-		if(currentCommandIndex+1>=protocolLenght){
-			return;		
-		}		
-		currentCommandIndex++;
-		executeCommand(protocol[currentCommandIndex].commandType, protocol[currentCommandIndex].args);
-    Serial.println(this->toString());
-	}
+void IA::autoselectProtocol() {
+  selectedProtocolId_=-1;
+  unsigned short int maxPriority = 0;
+  for (unsigned short int selectedProtocolId = 0; selectedProtocolId < protocolCount_; ++selectedProtocolId) {
+    if (!protocols_[selectedProtocolId]->isCompleted()) {
+      if (protocols_[selectedProtocolId]->getPriority(this) > maxPriority
+            && protocols_[selectedProtocolId]->getPriority(this)>PRIORITY_NULL) {
+        maxPriority = protocols_[selectedProtocolId]->getPriority(this);
+        selectedProtocolId_ = selectedProtocolId;
+      }
+    }
+  }
+
 }
 
-String IA::toString(){
-  return "Current ActionType: "+String(protocol[currentCommandIndex].commandType)
-        +" | arg[0]: "+String(protocol[currentCommandIndex].args[0])
-        +" | currentCommandIndex: "+String(currentCommandIndex)
-        +" | maxCommandIndex: "+String(protocolLenght)
-        +" | mb->isBusy(): "+(mb->isBusy()?"true":"false")
-        +" | claw->isBusy(): "+(claw->isBusy()?"true":"false");
+void IA::update() {
+  if(!active)return;
+  if (!mb->isBusy() && !claw->isBusy()) {
+    if (selectedProtocolId_==-1||protocols_[selectedProtocolId_]->isCompleted()) {
+      autoselectProtocol();
+    }
+    if(selectedProtocolId_!=-1)protocols_[selectedProtocolId_]->update(this);
+  }
 }
 
-void IA::executeCommand(CommandType command, double args[3]){
-		// {forward, rotate, load, unload, stack}
-		if(command==CommandType::forward){
-			mb->translate(args[0]);
-		}else if(command==CommandType::rotate){
-			mb->rotate(args[0]);
-		}else if(command==CommandType::moveTo){
-			mb->moveTo(args[0], args[1], args[2]); //X, Y, TETA
-		}else if(command==CommandType::load){
-			claw->load();
-		}else if(command==CommandType::unload){
-			claw->unload();
-		}else if(command==CommandType::stack){
-			claw->stack();
-		}else if(command==CommandType::buldozer){
-			//claw.openWide();
-		}else if(command==CommandType::recalibrate){
-      mb->translate(args[0]);
-		}
-}
 
+void IA::setFlag(String flagName, unsigned char value) {
+  for (unsigned int i=0;i<=maxFlagIndex;i++) {
+    if (dictionnary[i].id == flagName) {
+      dictionnary[i].value = value;
+      return;
+    }
+  }
+  dictionnary[++maxFlagIndex] = {flagName, value};
+}
+short int IA::getFlag(String flagName) { //return an unsigned char, or -1 if not found
+#if 1
+
+  for (auto entry : dictionnary) {
+    if (entry.id == flagName) {
+      return entry.value;
+    }
+  }
+
+#else
+
+  //Je surchauffe, si qqn veux faire de l'optimisation et rajouter une hashmap ça me va
+
+#endif
+  return -1;
+}
+void IA::activate(){
+  active=true;
+  Serial.println("LOG activated_AI");
+}
+void IA::deactivate(){
+  active=false;
+  Serial.println("LOG deactivated_AI");
+}

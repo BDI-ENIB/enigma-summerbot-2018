@@ -1,0 +1,1 @@
+volatile bool globalSide=false;
