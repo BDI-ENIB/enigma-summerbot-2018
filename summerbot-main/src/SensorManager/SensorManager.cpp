@@ -1,4 +1,4 @@
-#include "SensorManager.hpp"
+#include "SensorManager.h"
 
 SensorManager::SensorManager(){
    __IdToType = (unsigned char *)malloc((size_t)(8*sizeof(unsigned char)));

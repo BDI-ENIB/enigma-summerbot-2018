@@ -1,4 +1,4 @@
-#include "SensorManager.hpp"
+#include "SensorManager.h"
 #include <Arduino.h>
 
 /* defines for every sensors on the summerbot board */
@@ -43,3 +43,4 @@ void loop (){
   
   delay(300);
 }
+
