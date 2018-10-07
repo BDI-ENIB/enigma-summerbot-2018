@@ -21,7 +21,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "SerialCommand1.h"
+#include "ViveSerialCommand.h"
 
 /**
  * Constructor makes sure some things are set.
@@ -142,3 +142,4 @@ void SerialCommand1::clearBuffer() {
 char *SerialCommand1::next() {
   return strtok_r(NULL, delim, &last);
 }
+

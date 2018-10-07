@@ -1,4 +1,5 @@
-#include "src/SerialCommand1/SerialCommand1.h"
+#include "src/ViveSerialCommand/ViveSerialCommand.h"
+
 SerialCommand1 sCmd1;
 long vt = millis();
 bool viveStarted=false;
@@ -32,3 +33,4 @@ void vive_pos_command() {
 void vive_ready_command() {
   viveStarted=true;
 }
+

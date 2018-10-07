@@ -142,3 +142,4 @@ void SerialCommand::clearBuffer() {
 char *SerialCommand::next() {
   return strtok_r(NULL, delim, &last);
 }
+

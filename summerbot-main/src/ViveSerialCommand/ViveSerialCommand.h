@@ -21,8 +21,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef SerialCommand1_h
-#define SerialCommand1_h
+#ifndef ViveSerialCommand_h
+#define ViveSerialCommand_h
 
 #if defined(WIRING) && WIRING >= 100
   #include <Wiring.h>
@@ -72,4 +72,5 @@ class SerialCommand1 {
     char *last;                         // State variable used by strtok_r during processing
 };
 
-#endif //SerialCommand_h
+#endif //ViveSerialCommand_h
+
