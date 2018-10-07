@@ -11,7 +11,7 @@
 #include "src/protocols/bee_activation_protocol.hpp"
 
 //libs
-#include "src/summerbot-motionbase/MotionBase.h"
+#include "src/MotionBase/MotionBase.h"
 #include "src/summerbot-screen/Screen.h"
 #include "src/summerbot-screen/IconsId.h"
 #include "src/SensorManager/SensorManager.h"

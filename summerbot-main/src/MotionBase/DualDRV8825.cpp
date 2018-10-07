@@ -336,3 +336,4 @@ void DualDRV8825::disable(void){
         digitalWrite(enable_pin, HIGH);
     }
 }
+

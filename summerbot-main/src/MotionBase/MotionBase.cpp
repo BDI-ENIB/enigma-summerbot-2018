@@ -1,4 +1,9 @@
 #include "MotionBase.h"
+
+double shortestAngle(double a){
+  return fabs(a)>3.141592?(a>0?-3.141592*2+fabs(a):+3.141592*2-fabs(a)):a;
+}
+
 // --- moves management ---
 void MotionBase::nextMove(){
   Move* mv = moves_;
@@ -48,34 +53,46 @@ String MotionBase::movesString(){
 }
 // --- moves creators ---
 void MotionBase::translate(double distance){
+    translateRPM(distance,DEFAULT_RPM);
+}
+void MotionBase::translateRPM(double distance,int RPM){
     if(distance==0)return;
     long steps=fabs(distance)*TRANSLATION_MICROSTEPS*STEP_PER_REVOLUTION/wheelRadius_/2.0/3.141592654359;
-    Move* mv = new Move(false,distance<0,steps);
+    Move* mv = new Move(false,distance<0,steps,RPM);
     if(moves_)moves_->append(mv);
     else moves_ = mv;
 }
 void MotionBase::rotate(double rotation){
+    rotateRPM(rotation,DEFAULT_RPM);
+}
+void MotionBase::rotateRPM(double rotation,int RPM){
     if(rotation==0)return;
     long steps=fabs(rotation)*ROTATION_MICROSTEPS*STEP_PER_REVOLUTION*robotRadius_/wheelRadius_/2.0/3.141592654359;
     //Serial.println(steps);
-    Move* mv = new Move(true,rotation<0,steps);
+    Move* mv = new Move(true,rotation<0,steps,RPM);
     if(moves_)moves_->append(mv);
     else moves_ = mv;
 }
 void MotionBase::moveTo(double x,double y){
+  moveToRPM(x,y,DEFAULT_RPM);
+}
+void MotionBase::moveToRPM(double x,double y,int RPM){
   computeLastMoveCoords();
   double r=atan2(y-lastMoveY_,x-lastMoveX_);
-  rotate(r-lastMoveA_);
-  translate(sqrt((x-lastMoveX_)*(x-lastMoveX_)+(y-lastMoveY_)*(y-lastMoveY_)));
+  rotateRPM(shortestAngle(r-lastMoveA_),RPM);
+  translateRPM(sqrt((x-lastMoveX_)*(x-lastMoveX_)+(y-lastMoveY_)*(y-lastMoveY_)),RPM);
 }
 void MotionBase::moveTo(double x,double y,double a){
+  moveToRPM(x,y,a,DEFAULT_RPM);
+}
+void MotionBase::moveToRPM(double x,double y,double a,int RPM){
   computeLastMoveCoords();
   double r=atan2(y-lastMoveY_,x-lastMoveX_);
   //Serial.println(r-lastMoveA_);
-  rotate(r-lastMoveA_);
-  translate(sqrt((x-lastMoveX_)*(x-lastMoveX_)+(y-lastMoveY_)*(y-lastMoveY_)));
+  rotateRPM(shortestAngle(r-lastMoveA_),RPM);
+  translateRPM(sqrt((x-lastMoveX_)*(x-lastMoveX_)+(y-lastMoveY_)*(y-lastMoveY_)),RPM);
   //Serial.println(a-r);
-  rotate(a-r);
+  rotateRPM(shortestAngle(a-r),RPM);
 }
 // ---  ---
 bool MotionBase::update(){
@@ -103,6 +120,7 @@ bool MotionBase::update(){
     }
     //Serial.println("asyncMove");
     //Serial.println(movesString());
+    driver_->setRPM(moves_->RPM_);
     driver_->asyncMove((moves_->direction_?-1:1)*moves_->steps_,moves_->isRotation_);
     motionStarted_ = true;
   }else{
