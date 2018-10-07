@@ -16,3 +16,4 @@ class BeeActivationProtocol: public Protocol {
 };
 
 #endif
+

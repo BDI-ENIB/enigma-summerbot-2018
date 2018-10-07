@@ -4,7 +4,7 @@
 #include "src/summerbot-motionbase/MotionBase.h"
 #include "src/summerbot-claw/claw.hpp"
 #include "src/summerbot-screen/Screen.h"
-#include "src/summerbot-bee/Bee.h"
+#include "src/Bee/Bee.h"
 #include "protocol.hpp"
 
 #define MAX_FLAG_NUMBER 20
@@ -48,3 +48,4 @@ class IA {
     void deactivate();
 };
 #endif
+

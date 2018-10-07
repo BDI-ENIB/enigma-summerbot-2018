@@ -3,7 +3,7 @@
 #include "../../ia.hpp"
 #include "../../nodes.hpp"
 #include "../../pinout.h"
-#include "../summerbot-bee/Bee.h"
+#include "../Bee/Bee.h"
 #include <Arduino.h>
 
 void BeeActivationProtocol::update(IA *ia){ //execute the next action of this protocol
@@ -48,3 +48,4 @@ boolean BeeActivationProtocol::isCompleted(){ //wether the last action of this p
 unsigned short int BeeActivationProtocol::getPriority(IA *ia){
   return priority;
 }
+
