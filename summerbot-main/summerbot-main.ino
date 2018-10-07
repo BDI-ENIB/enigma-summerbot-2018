@@ -12,8 +12,8 @@
 
 //libs
 #include "src/MotionBase/MotionBase.h"
-#include "src/summerbot-screen/Screen.h"
-#include "src/summerbot-screen/IconsId.h"
+#include "src/Screen/Screen.h"
+#include "src/Screen/IconsId.h"
 #include "src/SensorManager/SensorManager.h"
 #include "src/Bee/Bee.h"
 #include "src/Claw/Claw.h"

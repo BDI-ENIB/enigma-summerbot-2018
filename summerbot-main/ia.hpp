@@ -2,7 +2,7 @@
 #define IA_H 1
 
 #include "src/MotionBase/MotionBase.h"
-#include "src/summerbot-screen/Screen.h"
+#include "src/Screen/Screen.h"
 #include "src/Bee/Bee.h"
 #include "src/Claw/Claw.h"
 #include "protocol.hpp"
