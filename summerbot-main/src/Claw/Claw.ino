@@ -1,4 +1,4 @@
-#include "claw.hpp"
+#include "Claw.h"
 #include <Servo.h>
 
 IntervalTimer motionTimer;
@@ -20,7 +20,7 @@ void setup() {
 	tmplift.attach(4);
 	tmpClampL.attach(3);
 	tmpClampR.attach(2);
-	claw = new Claw(&tmplift,200,&tmpClampL,&tmpClampR,200);
+	claw = new Claw(&tmplift,&tmpClampL,&tmpClampR,200,200);
 	delay(100);
 	claw->init();
 	Serial.println("Claw initilized");
@@ -54,3 +54,4 @@ void loop() {
 void motionLoop() {
 	claw->update();
 }
+

@@ -1,22 +1,30 @@
+//basics
 #include <Arduino.h>
 #include <Servo.h>
 
+//protocols
 #include "src/protocols/cube_unloading_protocol.hpp"
 #include "src/protocols/cube_loading_protocol.hpp"
 #include "src/protocols/recalibration_protocol.hpp"
 #include "src/protocols/panel_activation_protocol.hpp"
 #include "src/protocols/buldozer_cube_loading_protocol.hpp"
 #include "src/protocols/bee_activation_protocol.hpp"
-#include "src/summerbot-claw/claw.hpp"
+
+//libs
 #include "src/summerbot-motionbase/MotionBase.h"
 #include "src/summerbot-screen/Screen.h"
 #include "src/summerbot-screen/IconsId.h"
 #include "src/SensorManager/SensorManager.h"
 #include "src/Bee/Bee.h"
+#include "src/Claw/Claw.h"
+
+//diverses
 #include "pinout.h"
 #include "nodes.hpp"
 #include "terrain.h"
 #include "robot.h"
+
+//ia
 #include "ia.hpp"
 
 #define STEPS_PER_REV 200

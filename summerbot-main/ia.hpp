@@ -2,9 +2,9 @@
 #define IA_H 1
 
 #include "src/summerbot-motionbase/MotionBase.h"
-#include "src/summerbot-claw/claw.hpp"
 #include "src/summerbot-screen/Screen.h"
 #include "src/Bee/Bee.h"
+#include "src/Claw/Claw.h"
 #include "protocol.hpp"
 
 #define MAX_FLAG_NUMBER 20

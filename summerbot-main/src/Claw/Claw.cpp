@@ -1,18 +1,19 @@
 //---Pince header
 
-#include "claw.hpp"
+#include "Claw.h"
 
 
 //---Constructor
 
 /**
-  *	Pince(lift Servo, uchar lift_speed, clamp Servo, uchar clamp_speed) 
+  *Pince(lift Servo, uchar lift_speed, clamp Servo, uchar clamp_speed) 
   */
-Claw::Claw(Servo *liftServo, unsigned char lt_speed, Servo *clpServoR, Servo *clpServoL, unsigned char clp_speed){
+Claw::Claw(Servo *liftServo, Servo *clpServoR, Servo *clpServoL, unsigned char lt_speed, unsigned char clp_speed){
 
 	lift=liftServo;
 	clampLeft = clpServoR;
 	clampRight = clpServoL;
+	//speed are inverted to make the use of the lib more logical
 	liftSpeed = 255 - lt_speed;
 	clampSpeed = 255 - clp_speed;
 	lastClampTime = millis();
@@ -24,10 +25,11 @@ Claw::Claw(Servo *liftServo, unsigned char lt_speed, Servo *clpServoR, Servo *cl
 
 
 //---Functions
-/**
-  * init( )
-  */
 
+/**
+  *init( )
+  *assure that the claw is in it's iit state : down and fully opened
+  */
 void Claw::init(){
   lift->write(DOWN);
   delay(20);
@@ -38,7 +40,8 @@ void Claw::init(){
 }
 
 /**
-  * moveLift(uchar pos)
+  *moveLift(uchar pos)
+  *add a clamp move on the vertical axis
   */
 void Claw::moveLift(int targPos) {
 	if(lift->read() == targPos) {
@@ -49,7 +52,8 @@ void Claw::moveLift(int targPos) {
 }
 
 /**
-  * moveClamp(uchar pos)
+  *moveClamp(uchar pos)
+  *add an clamp move on the opening 
   */
 void Claw::moveClamp(int targPos) {
 	if(clampRight->read() == targPos) {
@@ -60,7 +64,9 @@ void Claw::moveClamp(int targPos) {
 }
 
 /**
-  * load()
+  *load()
+  *add a list of move for the clamp to execute, moving down, then closing
+  *before moving up again
   */
 void Claw::load() {
 	
@@ -71,7 +77,9 @@ void Claw::load() {
 }
 
 /**
-  * unload()
+  *unload()
+  *add a list of move for the clamp to execute, moving down, then opening
+  *before moving up again
   */
 void Claw::unload() {
 	
@@ -82,12 +90,14 @@ void Claw::unload() {
 }
 
 /**
-  * stack()
+  *stack()
+  *add a list of move for the clamp to execute, moving down, then opening
+  *a little, closing and moving up again (need some rework)
   */
 void Claw::stack() {
 
 	moveLift(DOWN);
-	moveClamp(CLOSE-1);
+	moveClamp(CLOSE-1); //just a little bit less close than usual
 	moveClamp(CLOSE);
 	moveLift(UP);
 	
@@ -95,30 +105,40 @@ void Claw::stack() {
 
   
 /**
-  * pause
+  *pauses the claw whatever it's doing
   */
 void Claw::pause() {
 	isPaused = true;
 }
 
 /**
-  * unpause
+  *resuming the claw move that's been paused
   */
 void  Claw::unpause() {
+	//TODO rename resume
 	if(isPaused) {
 		isPaused = false;
 	}
 }
 
 /**
-  * clearMoves
+  *clear all the registered move
   */
 void Claw::clearMoves() {
 	moves_->clear();
 }
 
+/*
+ *clear the curent move
+ */
+void Claw::clearCurrentMove () {
+	ClawMove* mv = moves_;
+	moves_ = moves_->getNext();
+	delete mv;
+}
+
 /**
-  * movesString
+  *return a string af all the moves registered, used for debug
   */
 String Claw::movesString(){
   String r="";
@@ -131,19 +151,23 @@ String Claw::movesString(){
 }
 
 /**
-  * setClampSpeed
+  *set the clamp speed
   */
 void Claw::setClampSpeed(unsigned char clpSpeed){
 	clampSpeed=255-clpSpeed;
 }
 
 /**
-  * setLiftSpeed
+  *set the lift speed
   */
 void Claw::setLiftSpeed(unsigned char ltSpeed){
 	liftSpeed=255-ltSpeed;
 }
 
+/*
+ *has to be called regulary by the main program. Allow the
+ *lib to be non-blocking
+ */
 void Claw::update() {
 	
 	if(moves_ && !isPaused) {
@@ -169,16 +193,17 @@ void Claw::update() {
 	}
 }
 	
-void Claw::clearCurrentMove () {
-	ClawMove* mv = moves_;
-	moves_ = moves_->getNext();
-	delete mv;
-}
-
+/*
+ *open the claw wide to alow the summerbot to push the cubes with it 
+ */
 void Claw::openWide() {
 	//to be coded
 }
 
+/*
+ *return a boolean indicating the current state of the lib
+ */
 bool Claw::isBusy() {
 	return moves_;
 }
+
