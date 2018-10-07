@@ -1,4 +1,4 @@
-#include "buldozer_cube_loading_protocol.hpp"
+#include "buldozer_cube_loading_protocol.h"
 #include "../../robot.h"
 #include "../../ia.hpp"
 #include "../../nodes.hpp"
@@ -54,3 +54,4 @@ boolean BuldozerCubeLoadingProtocol::isCompleted(){ //wether the last action of 
 unsigned short int BuldozerCubeLoadingProtocol::getPriority(IA *ia){
   return priority;
 }
+

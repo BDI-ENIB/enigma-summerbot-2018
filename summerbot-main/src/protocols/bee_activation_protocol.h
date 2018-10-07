@@ -1,7 +1,7 @@
 #ifndef BEE_ACTIVATOR_PROTOCOL
 #define BEE_ACTIVATOR_PROTOCOL 1
 
-#include "../../protocol.hpp"
+#include "../../protocol.h"
 class IA;
 
 class BeeActivationProtocol: public Protocol {

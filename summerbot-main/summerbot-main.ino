@@ -3,12 +3,12 @@
 #include <Servo.h>
 
 //protocols
-#include "src/protocols/cube_unloading_protocol.hpp"
-#include "src/protocols/cube_loading_protocol.hpp"
-#include "src/protocols/recalibration_protocol.hpp"
-#include "src/protocols/panel_activation_protocol.hpp"
-#include "src/protocols/buldozer_cube_loading_protocol.hpp"
-#include "src/protocols/bee_activation_protocol.hpp"
+#include "src/protocols/cube_unloading_protocol.h"
+#include "src/protocols/cube_loading_protocol.h"
+#include "src/protocols/recalibration_protocol.h"
+#include "src/protocols/panel_activation_protocol.h"
+#include "src/protocols/buldozer_cube_loading_protocol.h"
+#include "src/protocols/bee_activation_protocol.h"
 
 //libs
 #include "src/MotionBase/MotionBase.h"

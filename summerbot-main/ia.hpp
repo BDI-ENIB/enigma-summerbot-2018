@@ -5,7 +5,7 @@
 #include "src/Screen/Screen.h"
 #include "src/Bee/Bee.h"
 #include "src/Claw/Claw.h"
-#include "protocol.hpp"
+#include "protocol.h"
 
 #define MAX_FLAG_NUMBER 20
 #define MAX_PROTOCOL_NUMBER 15

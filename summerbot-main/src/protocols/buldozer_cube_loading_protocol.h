@@ -1,7 +1,7 @@
 #ifndef CUBE_BULDOZER_LOADING_PROTOCOL
 #define CUBE_BULDOZER_LOADING_PROTOCOL 1
 
-#include "../../protocol.hpp"
+#include "../../protocol.h"
 class IA;
 
 class BuldozerCubeLoadingProtocol: public Protocol {
@@ -21,3 +21,4 @@ class BuldozerCubeLoadingProtocol: public Protocol {
 };
 
 #endif
+

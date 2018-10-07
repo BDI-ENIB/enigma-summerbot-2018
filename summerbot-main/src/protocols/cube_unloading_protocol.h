@@ -1,7 +1,7 @@
 #ifndef CUBE_UNLOAD_PROTOCOL
 #define CUBE_UNLOAD_PROTOCOL 1
 
-#include "../../protocol.hpp"
+#include "../../protocol.h"
 class IA;
 
 class CubeUnloadingProtocol: public Protocol {
@@ -17,3 +17,4 @@ class CubeUnloadingProtocol: public Protocol {
 };
 
 #endif
+

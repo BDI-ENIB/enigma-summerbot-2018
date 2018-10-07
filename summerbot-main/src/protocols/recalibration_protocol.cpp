@@ -1,4 +1,4 @@
-#include "recalibration_protocol.hpp"
+#include "recalibration_protocol.h"
 #include "../../ia.hpp"
 #include "../../robot.h"
 #include "../../pinout.h"
@@ -83,3 +83,4 @@ unsigned short int RecalibrationProtocol::getPriority(IA *ia){
     return priority;
   }
 }
+

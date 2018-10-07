@@ -4,20 +4,20 @@
 IA::IA(MotionBase *mb, Claw *claw, Screen *screen, Bee *bee):
   protocols_{},
   protocolCount_{},
+  maxFlagIndex{0},
   mb{mb},
   claw{claw},
   screen{screen},
-  bee{bee},
-  maxFlagIndex{0} {}
+  bee{bee} {}
 
 IA::IA(MotionBase *mb, Claw *claw, Screen *screen, Bee *bee, Protocol *protocols[], unsigned short int protocolCount):
   protocols_{},
   protocolCount_{protocolCount},
+  maxFlagIndex{0},
   mb{mb},
   claw{claw},
-  bee{bee},
-  screen{screen},
-  maxFlagIndex{0} {
+  screen{screen}, 
+  bee{bee} {
   for (unsigned short int i = 0; i < protocolCount; ++i) {
     protocols_[i] = protocols[i];
   }
@@ -86,3 +86,4 @@ void IA::deactivate(){
   active=false;
   Serial.println("LOG deactivated_AI");
 }
+

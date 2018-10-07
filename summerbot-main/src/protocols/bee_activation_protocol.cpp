@@ -1,4 +1,4 @@
-#include "bee_activation_protocol.hpp"
+#include "bee_activation_protocol.h"
 #include "../../robot.h"
 #include "../../ia.hpp"
 #include "../../nodes.hpp"

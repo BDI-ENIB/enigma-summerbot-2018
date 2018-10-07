@@ -1,4 +1,4 @@
-#include "panel_activation_protocol.hpp"
+#include "panel_activation_protocol.h"
 #include "../../robot.h"
 #include "../../ia.hpp"
 #include "../../pinout.h"
@@ -69,3 +69,4 @@ bool PanelActivationProtocol::isCompleted(){ //wether the last action of this pr
 unsigned short int PanelActivationProtocol::getPriority(IA *ia){
   return priority;
 }
+

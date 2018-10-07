@@ -1,4 +1,4 @@
-#include "cube_unloading_protocol.hpp"
+#include "cube_unloading_protocol.h"
 #include "../../robot.h"
 #include "../../ia.hpp"
 #include "../../nodes.hpp"
@@ -49,3 +49,4 @@ unsigned short int CubeUnloadingProtocol::getPriority(IA *ia){
   }
   return (ia->getFlag("towerLoaded")==1)?priority:PRIORITY_NULL;
 }
+

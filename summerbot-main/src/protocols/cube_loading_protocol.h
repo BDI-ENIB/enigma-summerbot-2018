@@ -1,7 +1,7 @@
 #ifndef CUBE_LOAD_PROTOCOL
 #define CUBE_LOAD_PROTOCOL 1
 
-#include "../../protocol.hpp"
+#include "../../protocol.h"
 class IA;
 
 class CubeLoadingProtocol: public Protocol {
@@ -18,3 +18,4 @@ class CubeLoadingProtocol: public Protocol {
 };
 
 #endif
+
