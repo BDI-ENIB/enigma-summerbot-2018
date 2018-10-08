@@ -1,5 +1,5 @@
 #include "recalibration_protocol.h"
-#include "../../ia.hpp"
+#include "../../ai.h"
 #include "../../robot.h"
 #include "../../pinout.h"
 #define SIMULATOR
@@ -8,7 +8,7 @@ void RecalibrationProtocol::update(IA *ia){ //execute the next action of this pr
 
   switch (state){
     case 0:
-    ia->setFlag("recalibrationNeeded",NULL);
+    ia->setFlag("recalibrationNeeded",0);
     Serial.println("LOG Starting_RecalibrationProtocol");
     ia->mb->translate(-abs((ia->getFlag("side")==0?3000-ia->mb->getY():ia->mb->getY())-ROBOT_1_W/2-10));
     break;
@@ -75,7 +75,7 @@ bool RecalibrationProtocol::isCompleted(){ //wether the last action of this prot
 
 unsigned short int RecalibrationProtocol::getPriority(IA *ia){
   if(waitForFlag){
-    if(ia->getFlag("recalibrationNeeded")!=NULL){
+    if(ia->getFlag("recalibrationNeeded")!=0){
       return PRIORITY_HIGHEST;
     }
     return PRIORITY_NULL;

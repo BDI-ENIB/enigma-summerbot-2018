@@ -1,4 +1,4 @@
-#include "ia.hpp"
+#include "ai.h"
 #include <Arduino.h>
 
 IA::IA(MotionBase *mb, Claw *claw, Screen *screen, Bee *bee):

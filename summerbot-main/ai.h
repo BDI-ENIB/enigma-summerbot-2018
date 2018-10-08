@@ -1,5 +1,5 @@
-#ifndef IA_H
-#define IA_H 1
+#ifndef AI_H
+#define AI_H 1
 
 #include "src/MotionBase/MotionBase.h"
 #include "src/Screen/Screen.h"

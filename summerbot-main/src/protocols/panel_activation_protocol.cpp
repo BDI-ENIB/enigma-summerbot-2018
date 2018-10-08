@@ -1,6 +1,6 @@
 #include "panel_activation_protocol.h"
 #include "../../robot.h"
-#include "../../ia.hpp"
+#include "../../ai.h"
 #include "../../pinout.h"
 #include "../../nodes.hpp"
 #include <Arduino.h>

@@ -295,7 +295,7 @@ bool DualDRV8825::update(void){
           digitalWrite(rstep_pin, LOW);
           // account for calcStepPulse() execution time; sets ceiling for max rpm on slower MCUs
           last_action_end = micros();
-          next_action_interval = (pulse > m) ? pulse - m : 1;
+          next_action_interval = (pulse > (long)m) ? pulse - m : 1;
         }
         return true;
     } else {

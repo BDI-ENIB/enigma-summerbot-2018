@@ -25,7 +25,7 @@
 #include "robot.h"
 
 //ia
-#include "ia.hpp"
+#include "ai.h"
 
 #define STEPS_PER_REV 200
 #define DISTANCE_THRESHOLD_MOVING_FORWARD 250 //15cm
