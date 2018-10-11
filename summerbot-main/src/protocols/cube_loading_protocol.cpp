@@ -1,6 +1,6 @@
-#include "cube_loading_protocol.hpp"
+#include "cube_loading_protocol.h"
 #include "../../robot.h"
-#include "../../ia.hpp"
+#include "../../ai.h"
 #include "../../nodes.hpp"
 #include <Arduino.h>
 
@@ -57,3 +57,4 @@ boolean CubeLoadingProtocol::isCompleted(){ //wether the last action of this pro
 unsigned short int CubeLoadingProtocol::getPriority(IA *ia){
   return (ia->getFlag("towerLoaded")==0)?priority:0;
 }
+

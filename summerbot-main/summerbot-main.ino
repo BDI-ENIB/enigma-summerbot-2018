@@ -1,23 +1,31 @@
+//basics
 #include <Arduino.h>
 #include <Servo.h>
 
-#include "src/protocols/cube_unloading_protocol.hpp"
-#include "src/protocols/cube_loading_protocol.hpp"
-#include "src/protocols/recalibration_protocol.hpp"
-#include "src/protocols/panel_activation_protocol.hpp"
-#include "src/protocols/buldozer_cube_loading_protocol.hpp"
-#include "src/protocols/bee_activation_protocol.hpp"
-#include "src/summerbot-claw/claw.hpp"
-#include "src/summerbot-motionbase/MotionBase.h"
-#include "src/summerbot-screen/Screen.h"
-#include "src/summerbot-screen/IconsId.h"
-#include "src/summerbot-sensormanager/SensorManager.hpp"
-#include "src/summerbot-bee/Bee.h"
+//protocols
+#include "src/protocols/cube_unloading_protocol.h"
+#include "src/protocols/cube_loading_protocol.h"
+#include "src/protocols/recalibration_protocol.h"
+#include "src/protocols/panel_activation_protocol.h"
+#include "src/protocols/buldozer_cube_loading_protocol.h"
+#include "src/protocols/bee_activation_protocol.h"
+
+//libs
+#include "src/MotionBase/MotionBase.h"
+#include "src/Screen/Screen.h"
+#include "src/Screen/IconsId.h"
+#include "src/SensorManager/SensorManager.h"
+#include "src/Bee/Bee.h"
+#include "src/Claw/Claw.h"
+
+//diverses
 #include "pinout.h"
 #include "nodes.hpp"
 #include "terrain.h"
 #include "robot.h"
-#include "ia.hpp"
+
+//ia
+#include "ai.h"
 
 #define STEPS_PER_REV 200
 #define DISTANCE_THRESHOLD_MOVING_FORWARD 250 //15cm
@@ -193,3 +201,4 @@ void loop () {
 void motionLoop() {
   mb->update();
 }
+
