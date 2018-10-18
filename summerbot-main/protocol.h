@@ -6,7 +6,7 @@ class IA;
 class Protocol {
   public:
     virtual void update(IA *ia) = 0; //execute the next action of this protocol
-    virtual bool isCompleted() = 0; //wether the last action of this protocol have already been executed or not
+    virtual bool isCompleted() = 0; //whether the last action of this protocol has already been executed or not
     virtual unsigned short int getPriority(IA *ia);
   private:
     enum CommandType {forward, rotate, moveTo, load, unload, stack, buldozer, recalibrateMovingBackward};
@@ -16,4 +16,3 @@ class Protocol {
     } Command;
 };
 #endif
-
