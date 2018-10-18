@@ -2,4 +2,12 @@
 #include "../../robot.h"
 #include "../../ai.h"
 
-void DeplacementProtocol::update 
+void DeplacementProtocol::update(IA*ia){
+
+
+
+
+
+
+  
+}

@@ -3,12 +3,15 @@
 #include <Servo.h>
 
 //protocols
-#include "src/protocols/cube_unloading_protocol.h"
+
+/*#include "src/protocols/cube_unloading_protocol.h"
 #include "src/protocols/cube_loading_protocol.h"
 #include "src/protocols/recalibration_protocol.h"
 #include "src/protocols/panel_activation_protocol.h"
 #include "src/protocols/buldozer_cube_loading_protocol.h"
-#include "src/protocols/bee_activation_protocol.h"
+#include "src/protocols/bee_activation_protocol.h"*/
+
+#include "src/protocols/deplacement_protocol.h"
 
 //libs
 #include "src/MotionBase/MotionBase.h"
@@ -107,9 +110,11 @@ void setup () {
   //AI
   ia = new IA(mb, claw, screen, bee);
   //ia->addProtocol(new PanelActivationProtocol(PRIORITY_HIGHEST, false, false));
-  ia->addProtocol(new BuldozerCubeLoadingProtocol(0, PRIORITY_VERY_HIGH, true, 2));
+
+  /*ia->addProtocol(new BuldozerCubeLoadingProtocol(0, PRIORITY_VERY_HIGH, true, 2));
   ia->addProtocol(new BuldozerCubeLoadingProtocol(1, PRIORITY_LOW, true, 0, false));
-  ia->addProtocol(new BeeActivationProtocol(PRIORITY_MEDIUM));
+  ia->addProtocol(new BeeActivationProtocol(PRIORITY_MEDIUM));*/
+  ia->addProtocol(new DeplacementProtocol(PRIORITY_MEDIUM));
   if(!forcedSide){
     ia->setFlag("side", globalSide);
   }
@@ -201,4 +206,3 @@ void loop () {
 void motionLoop() {
   mb->update();
 }
-
