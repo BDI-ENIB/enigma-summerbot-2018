@@ -12,6 +12,7 @@ class DeplacementProtocol: public Protocol {
     unsigned short int getPriority(IA *ia) override;
   private:
     unsigned short priority;
+    unsigned char state=0;
 };
 
 #endif

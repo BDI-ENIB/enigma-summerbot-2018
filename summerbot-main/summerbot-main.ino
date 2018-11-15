@@ -9,8 +9,8 @@
 #include "src/protocols/recalibration_protocol.h"
 #include "src/protocols/panel_activation_protocol.h"
 #include "src/protocols/buldozer_cube_loading_protocol.h"
-#include "src/protocols/bee_activation_protocol.h"*/
-
+#include "src/protocols/bee_activation_protocol.h"
+*/
 #include "src/protocols/deplacement_protocol.h"
 
 //libs
@@ -67,8 +67,8 @@ void setup () {
 
   //Serial
   Serial.begin(250000);
-  commands_init();
-  vive_init();
+  //commands_init();
+  //vive_init();
   //screen
   screen = new Screen(SIMULATOR);
   screen->showInitFrame(TARGET_SCORE);
@@ -149,10 +149,12 @@ void setup () {
 }
 
 void delayStarter() {
+
+
   double tmp = 0;
   boolean hasStarterBeenInserted = false;
   while (true) {
-    tmp = (double)(tmp * 99.0 + digitalRead(STARTER)) / 100.0;
+    tmp = (double)(tmp * 99.0 + (digitalRead(STARTER)?LOW:HIGH)) / 100.0;
     if (!hasStarterBeenInserted && tmp >= 0.99) {
       hasStarterBeenInserted = true;
       //screen->drawIcon(ARMED);
@@ -162,9 +164,10 @@ void delayStarter() {
 	  screen->drawIcon(LAUNCHED);
       return;
     }
-    delay(1);
+    delay(1);/*
     commands_update();
-    vive_update();
+    vive_update();*/
+
   }
 
 }

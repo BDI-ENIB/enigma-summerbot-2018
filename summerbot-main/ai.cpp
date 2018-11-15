@@ -86,4 +86,3 @@ void IA::deactivate(){
   active=false;
   Serial.println("LOG deactivated_AI");
 }
-

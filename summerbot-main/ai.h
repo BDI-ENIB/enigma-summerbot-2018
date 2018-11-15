@@ -48,4 +48,3 @@ class IA {
     void deactivate();
 };
 #endif
-
